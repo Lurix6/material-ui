@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-//var injectTapEventPlugin = require("react-tap-event-plugin");
-//injectTapEventPlugin();
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles/';
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'light'//dark
+  },
+  typography: {useNextVatiants: true}
+})
 
 ReactDOM.render(
-  <MuiThemeProvider>
+  <MuiThemeProvider theme={theme}>
     <App />
   </MuiThemeProvider>
     , document.getElementById('root'));

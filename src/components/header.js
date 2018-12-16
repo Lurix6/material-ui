@@ -40,20 +40,23 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+
+
+
   render() {
-    const { classes } = this.props;
+    const { classes, driwerOpen } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
       <div>
-        <AppBar className={classes.root} position="static">
+        <AppBar className={classes.root} position="static" >
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={driwerOpen}  >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Photos
+              Material UI
             </Typography>
               <div>
                 <IconButton
