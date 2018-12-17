@@ -3,14 +3,25 @@ import AppBar from './components/header'
 import AppDrawer from './components/drawer'
 import AppButtons from './components/buttons'
 import AppList from './components/list'
+import Popover from '@material-ui/core/Popover'
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = () => ({
+  popover: {
+    width: '200px',
+    padding: '15px 30px',
+    background:'blue'
+  },
+});
 
 class App extends Component {
 
-  constructor(props){
-    super(props)
 
-    this.state = {
+  state = {
       isDrawerOpen: false,
+      isPopoverOpen: false,
+      popoverElement: null,
       itemsList: [
         {
           name: 'element1',
@@ -33,18 +44,53 @@ class App extends Component {
           checked: false
         },
       ]
-    }
+
   }
 
   render() {
+    const {classes} = this.props
     return (
       <div>
         <AppDrawer isDrawerOpen={this.state.isDrawerOpen} onToggle={(isDrawerOpen) => this.setState({isDrawerOpen})}/>
         <AppBar driwerOpen={() => this.setState({isDrawerOpen: true})} />
         <div className='container'>
-          <AppButtons />
+          <AppButtons
+              itemChecked={this.state.itemsList.map(i => i.checked).filter(i => i)}
+              onDelate={() => {
+                let itemsList = this.state.itemsList.filter(i => !i.checked)
+                this.setState({
+                  itemsList
+                })
+              }}
+              onAdd={(popoverElement)=> {this.setState({popoverElement,isPopoverOpen: true })}}
+              />
+              <Popover
+               classes={{
+                 paper:classes.popover}}
+               open={this.state.isPopoverOpen}
+               anchorEl={this.state.popoverElement}
+               onClose={()=>{this.setState({isPopoverOpen: false})}}
+               anchorOrigin={{
+                 vertical: 'bottom',
+                 horizontal: 'center',
+               }}
+               transformOrigin={{
+                 vertical: 'top',
+                 horizontal: 'center',
+               }}
 
-          <AppList items={this.state.itemsList} />
+             >
+               <h2>Popover</h2>
+             </Popover>
+
+          <AppList
+              items={this.state.itemsList}
+              onCheck={(idx) => {
+                let {itemsList} = this.state
+                itemsList[idx].checked = !this.state.itemsList[idx].checked
+                this.setState({ itemsList })
+              }}
+          />
         </div>
       </div>
     );
@@ -53,4 +99,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default withStyles(styles)(App);

@@ -9,7 +9,6 @@ import cyan from '@material-ui/core/colors/cyan'
 
 
 
-
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
@@ -36,8 +35,9 @@ function AppButtons (props){
   const { classes } = props
   return(
     <div style={{marginBottom:40}}>
-        <Button className={classes.button} variant='contained' color='primary' onClick={()=> console.log('add Element')} >Add element</Button>
-        <Button className={classes.button} variant='contained' style={{backgroundColor: blueGrey[600], color:'white'}} onClick={()=> console.log('add Element')}>Delate selected element</Button>
+        <Button className={classes.button} variant='contained' color='primary' onClick={(event)=> props.onAdd(event.currentTarget)} >Add element</Button>
+        <Button className={classes.button} variant='contained' color='secondary' disabled={props.itemChecked.length === 0} onClick={()=> props.onDelate()}>Delate selected element</Button>
+
         <Button className={classes.button} variant="contained" color="default" onClick={()=> console.log('add Element')}>
           Upload
           <CloudUploadIcon className={classes.rightIcon}/>
