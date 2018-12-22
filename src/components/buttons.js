@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import blueGrey from '@material-ui/core/colors/blueGrey'
 import { withStyles } from '@material-ui/core/styles';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Fab from '@material-ui/core/Fab';
@@ -42,7 +41,7 @@ function AppButtons (props){
           Upload
           <CloudUploadIcon className={classes.rightIcon}/>
         </Button>
-        <Fab color="secondary" aria-label="Edit" className={classes.fab} style={{position:'fixed', right:50, bottom:50}} onClick={()=> console.log('add Element')}>
+        <Fab color="secondary" aria-label="Edit" className={classes.fab} style={{position:'fixed', right:50, bottom:50}} onClick={props.openModal}>
            <Icon>edit_icon</Icon>
         </Fab>
     </div>
